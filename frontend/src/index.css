@@ -40,3 +40,7 @@ main {
 .rating span {
   color: orange;
 }
+
+.img-large {
+  max-width: 100%;
+}
