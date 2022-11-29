@@ -28,10 +28,15 @@ main {
 
 .product img {
   height: 10rem;
-  width: 15rem;
-  max-width: 30rem;
+  width: 10rem;
+  max-width: 10rem;
+  max-height: 10rem;
 }
 
 .product-info {
   padding: 1rem;
+}
+
+.rating span {
+  color: orange;
 }

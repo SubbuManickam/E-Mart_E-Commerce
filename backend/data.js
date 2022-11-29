@@ -7,7 +7,9 @@ const data = {
             image: '/images/p1.png',
             price: 999,
             brand: 'Apple',
-            description: 'Best Phone'
+            description: 'Best Phone',
+            rating: 3.5,
+            numReviews: 2500
         },
         {
             name: 'Pixel',
@@ -16,7 +18,9 @@ const data = {
             image: '/images/p2.png',
             price: 699,
             brand: 'Google',
-            description: 'Best Phone'
+            description: 'Best Phone',
+            rating: 4,
+            numReviews: 4000
         },
         {
             name: 'Macbook',
@@ -25,7 +29,9 @@ const data = {
             image: '/images/l2.png',
             price: 1400,
             brand: 'Apple',
-            description: 'Best Laptop'
+            description: 'Best Laptop',
+            rating: 4,
+            numReviews: 5000
         },
         {
             name: 'Airpods',
@@ -34,7 +40,9 @@ const data = {
             image: '/images/h1.png',
             price: 599,
             brand: 'Apple',
-            description: 'Best Headphone'
+            description: 'Best Headphone',
+            rating: 5,
+            numReviews: 100
         }
     ]
 }
