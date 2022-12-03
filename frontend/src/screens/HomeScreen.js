@@ -6,6 +6,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Product from "../components/Product";
 import { Helmet } from "react-helmet-async";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
 
 
 const reducer = (state, action) => {
@@ -24,7 +26,7 @@ function HomeScreen() {
         loading: true,
         error: ''
     });
-    // const [products, setProducts] = useState([]);
+    
     useEffect(() => {
 
         const fetchData = async () => {
@@ -37,7 +39,6 @@ function HomeScreen() {
             } catch (err) {
                 dispatch({ type: 'FETCH_FAIL', payload: err.message });
             }
-            // setProducts(result.data);
         }
 
         fetchData();
@@ -51,7 +52,8 @@ function HomeScreen() {
             <div className="products">
                 {
 
-                    loading ? (<div>Loading...</div>) : error ? (<div>{error}</div>) : (
+                    loading ? (<LoadingBox /> ):
+                    error ? (<MessageBox variant="danger">{error}</MessageBox>) : (
                         <Row>
                             {products.map(product => (
                                 <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">

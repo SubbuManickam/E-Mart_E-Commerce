@@ -1,6 +1,7 @@
 const data = {
     products: [
         {
+            _id: '1',
             name: 'iPhone',
             slug: 'iphone',
             category: 'Phone',
@@ -13,6 +14,7 @@ const data = {
             countInStock: 5
         },
         {
+            _id: '2',
             name: 'Pixel',
             slug: 'pixel',
             category: 'Phone',
@@ -25,6 +27,7 @@ const data = {
             countInStock: 10
         },
         {
+            _id: '3',
             name: 'Macbook',
             slug: 'macbook-air',
             category: 'Laptop',
@@ -37,6 +40,7 @@ const data = {
             countInStock: 7
         },
         {
+            _id: '4',
             name: 'Airpods',
             slug: 'airpods-pro',
             category: 'Headphones',
