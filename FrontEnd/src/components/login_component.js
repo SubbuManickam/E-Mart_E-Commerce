@@ -63,15 +63,6 @@ export default class Login extends Component {
           />
         </div>
 
-        {/* <div class="form-outline mb-4">
-                        <input
-                          type="email"
-                          id="form2Example17"
-                          class="form-control form-control-lg"
-                        />
-                        <label class="form-label" for="form2Example17">Email address</label>
-                      </div> */}
-
         <div className="mb-3">
           <label>Password</label>
           <input
