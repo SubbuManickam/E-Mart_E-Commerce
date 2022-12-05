@@ -15,6 +15,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 function App() {
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -75,7 +76,7 @@ function App() {
           </Container>
         </main>
         <footer>
-          <div className='text-center'>Web Design Final Project 2022</div>
+          <div className='text-center bg-dark text-white mt-3'>Web Design Final Project 2022</div>
         </footer>
       </div>
     </BrowserRouter>

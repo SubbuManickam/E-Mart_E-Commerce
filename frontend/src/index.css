@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: blanchedalmond;
 }
 
 .site-container {
@@ -51,4 +52,14 @@ main {
 
 .small-container {
   max-width: 600px;
+}
+
+.carousel {
+  border-radius: 55px 55px 55px 55px;
+  overflow: hidden;
+}
+
+.cards {
+  border-radius: 30px 30px 30px 30px;
+  overflow: hidden;
 }
