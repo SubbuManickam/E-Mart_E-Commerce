@@ -44,15 +44,6 @@ export default class Login extends Component {
       <form onSubmit={this.handleSubmit}>
         <h3>Sign into your account</h3>
 
-        {/* <div class="col-md-6 col-lg-5 d-none d-md-block">
-          <img
-            src="./src/Images/login.jpg"
-            alt="login form"
-            class="img-fluid"
-            // style="border-radius: 1rem 0 0 1rem; height: 100%"
-          />
-        </div> */}
-
         <div className="mb-3">
           <label>Email address</label>
           <input
