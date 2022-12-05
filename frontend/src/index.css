@@ -63,3 +63,13 @@ main {
   border-radius: 30px 30px 30px 30px;
   overflow: hidden;
 }
+
+.checkout-steps > div {
+  border-bottom: 0.2rem solid gray;
+  color: gray;
+}
+
+.checkout-steps > div.active {
+  border-bottom: 0.2rem solid chocolate;
+  color: chocolate;
+}
