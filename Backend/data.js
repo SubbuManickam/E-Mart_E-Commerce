@@ -18,7 +18,7 @@ const data = {
       category: 'phone',
       image: '/images/phone2.png',
       price: 14000,
-      countInStock: 15,
+      countInStock: 0,
       brand: 'MOTO',
       rating: 4.5,
       numReviews: 14,
