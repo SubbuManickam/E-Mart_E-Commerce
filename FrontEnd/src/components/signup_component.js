@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-
+import {
+  BrowserRouter as Router,
+  Routes,
+  useNavigation,
+  Route,
+  Link,
+} from "react-router-dom";
+import Login from "./login_component";
 export default class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -12,8 +19,8 @@ export default class SignUp extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    const { fullname,email, password } = this.state;
-    console.log(fullname,email, password);
+    const { fullname, email, password } = this.state;
+    console.log(fullname, email, password);
     fetch("http://localhost:3000/users/add", {
       method: "POST",
       crossDomain: true,
@@ -31,6 +38,9 @@ export default class SignUp extends Component {
       .then((res) => res.json())
       .then((data) => {
         console.log(data, "userRegister");
+
+        // window.location.href = "http://localhost:3001";
+        // <Route exact path="/" element={<Login />} />;
       });
   }
   render() {
@@ -47,8 +57,6 @@ export default class SignUp extends Component {
             onChange={(e) => this.setState({ fullname: e.target.value })}
           />
         </div>
-
-        
 
         <div className="mb-3">
           <label>Email address</label>

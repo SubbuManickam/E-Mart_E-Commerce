@@ -89,5 +89,10 @@ router.delete("/delete", async function (req, res, next) {
     res.send({ message: "User Information Not Found" });
   }
 });
+router.get("/logout", (req, res) => {
+  console.log("Hello logout page");
+  res.clearCookie("jwtoken", { path: "/" });
+  res.status(200).send("user logged out!");
+});
 
 module.exports = router;
