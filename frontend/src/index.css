@@ -15,8 +15,9 @@ main {
   flex: 1;
 }
 .btn-primary {
-  background-color: rgb(255, 0, 166);
+  background-color: rgb(255, 191, 0);
   color: #000000;
+  border: 1px #404040 solid;
 }
 
 .rating span {
@@ -31,6 +32,7 @@ main {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
 }
 .product {
   border: 1px #404040 solid;
