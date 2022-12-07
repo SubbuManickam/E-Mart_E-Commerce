@@ -5,20 +5,6 @@ const b = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = "jswrt2537876gjhgjhbhjk";
 
-/* GET users listing. */
-router.get("/getAll", async function (req, res, next) {
-  try {
-    let userList = await user.find();
-    res.send({
-      message: "User Information Retreived Successfully ",
-      users: userList,
-    });
-  } catch (err) {
-    console.log(err);
-    res.send({ message: "User informaion Retreival failed", error: err.value });
-  }
-});
-
 router.post("/login", async function (req, res, next) {
   const { email, password } = req.body;
   const user2 = await user.findOne({ email });
@@ -51,44 +37,6 @@ router.post("/add", function (req, res, next) {
   });
 });
 
-router.put("/edit", async function (req, res, next) {
-  try {
-    const prevuser = req.body;
-    let existingUser = await user
-      .where("email")
-      .equals(prevuser.email)
-      .findOne();
-    if (existingUser != null) {
-      existingUser.fullname = prevuser.fullname;
-      existingUser.password = prevuser.password;
-    } else {
-      res.send({
-        message:
-          "Provided email id is not present in the database.Please check the email id",
-        prevuser,
-      });
-    }
-    await existingUser.save();
-    res.send(existingUser);
-  } catch (err) {
-    res.send({ message: err.message });
-  }
-});
-
-router.delete("/delete", async function (req, res, next) {
-  try {
-    console.log(req.query.email);
-    const userEmail = req.query.email;
-    let filter_user = await user.findOne({
-      email: req.query.email,
-    });
-    if (filter_user == null) throw new Error("User not found");
-    let userr1 = await user.where("email").equals(userEmail).deleteOne();
-    res.send({ message: "User Information successfully deleted", userr1 });
-  } catch (err) {
-    res.send({ message: "User Information Not Found" });
-  }
-});
 router.get("/logout", (req, res) => {
   console.log("Hello logout page");
   res.clearCookie("jwtoken", { path: "/" });
