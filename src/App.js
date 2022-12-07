@@ -20,6 +20,12 @@ import PaymentMethodScreen from './screens/PaymentMethodScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import ProtectedRoute from './components/ProtectedRoutes';
+import AdminRoute from './components/AdminRoute';
+import DashboardScreen from './screens/DashBoardScreen';
+import ProductListScreen from './screens/ProductListScreen';
+import ProductEditScreen from './screens/ProductEditScreen';
 
 
 function App() {
@@ -32,6 +38,7 @@ function App() {
     localStorage.removeItem('userInfo');
     localStorage.removeItem('shippingAddress');
     localStorage.removeItem('paymentMethod');
+    window.location.href = '/signin';
   };
 
   return (
@@ -69,6 +76,23 @@ function App() {
                 ) : (
                   <Link className="nav-link" to="/signin">SignIn</Link>
                 )}
+                    {userInfo && userInfo.isAdmin && (
+                    <NavDropdown title="Admin" id="admin-nav-dropdown">
+                      <LinkContainer to="/admin/dashboard">
+                        <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/products">
+                        <NavDropdown.Item>Products</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/orders">
+                        <NavDropdown.Item>Orders</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/users">
+                        <NavDropdown.Item>Users</NavDropdown.Item>
+                      </LinkContainer>
+                    </NavDropdown>
+                  )}
+
               </Nav>
               </Navbar.Collapse>
             </Container>
@@ -81,14 +105,56 @@ function App() {
               <Route path="/cart" element={<CartScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
-
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <ProfileScreen />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="/shipping" element={<ShippingAddressScreen />} />
               <Route path="/payment" element={<PaymentMethodScreen />} />
               <Route path="/placeOrder" element={<PlaceOrderScreen />} />
-              <Route path="/order/:id" element={<OrderScreen/>}/>
+              <Route
+                path="/order/:id"
+                element={
+                  <ProtectedRoute>
+                    <OrderScreen />
+                  </ProtectedRoute>
+                }
+              ></Route>
               <Route
                 path="/orderhistory"
-                element={<OrderHistoryScreen />}
+                element={
+                  <ProtectedRoute>
+                    <OrderHistoryScreen />
+                  </ProtectedRoute>
+                }
+              ></Route>
+                  <Route
+                path="/admin/dashboard"
+                element={
+                  <AdminRoute>
+                    <DashboardScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+               <Route
+                path="/admin/products"
+                element={
+                  <AdminRoute>
+                    <ProductListScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+                <Route
+                path="/admin/product/:id"
+                element={
+                  <AdminRoute>
+                    <ProductEditScreen />
+                  </AdminRoute>
+                }
               ></Route>
               <Route path="/" element={<HomeScreen />} />
             </Routes>
