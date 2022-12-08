@@ -12,7 +12,7 @@ import { Store } from './Store';
 import CartScreen from './screens/CartScreen';
 import SigninScreen from './screens/SigninScreen';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import {ToastContainer} from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SignupScreen from './screens/SignupScreen';
@@ -29,6 +29,7 @@ import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
+import { Image } from 'react-bootstrap';
 
 
 function App() {
@@ -37,7 +38,7 @@ function App() {
   const { cart, userInfo } = state;
 
   const signoutHandler = () => {
-    ctxDispatch({type: 'USER_SIGNOUT'});
+    ctxDispatch({ type: 'USER_SIGNOUT' });
     localStorage.removeItem('userInfo');
     localStorage.removeItem('shippingAddress');
     localStorage.removeItem('paymentMethod');
@@ -51,10 +52,13 @@ function App() {
         <header>
           <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
+              <Link to="/">
+                <Image src='/images/home.png' style={{ height: '3rem', color: 'white' }} />
+              </Link>
               <LinkContainer to="/">
                 <Navbar.Brand>E-Mart</Navbar.Brand>
               </LinkContainer>
-              <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto  w-100  justify-content-end">
                   <Link to="/cart" className="nav-link">
@@ -64,22 +68,22 @@ function App() {
                         {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
                       </Badge>
                     )}
-                </Link>
-                {userInfo ? (
-                  <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
-                    <LinkContainer to="/profile">
-                      <NavDropdown.Item>User Profile</NavDropdown.Item>
-                    </LinkContainer>
-                    <LinkContainer to="/orderHistory">
-                      <NavDropdown.Item>Order History</NavDropdown.Item>
-                    </LinkContainer>
-                    <NavDropdown.Divider />
+                  </Link>
+                  {userInfo ? (
+                    <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+                      <LinkContainer to="/profile">
+                        <NavDropdown.Item>User Profile</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/orderHistory">
+                        <NavDropdown.Item>Order History</NavDropdown.Item>
+                      </LinkContainer>
+                      <NavDropdown.Divider />
                       <Link className='dropdown-item' to="#signout" onClick={signoutHandler}>Sign Out</Link>
-                  </NavDropdown>
-                ) : (
-                  <Link className="nav-link" to="/signin">SignIn</Link>
-                )}
-                    {userInfo && userInfo.isAdmin && (
+                    </NavDropdown>
+                  ) : (
+                    <Link className="nav-link" to="/signin">SignIn</Link>
+                  )}
+                  {userInfo && userInfo.isAdmin && (
                     <NavDropdown title="Admin" id="admin-nav-dropdown">
                       <LinkContainer to="/admin/dashboard">
                         <NavDropdown.Item>Dashboard</NavDropdown.Item>
@@ -96,7 +100,7 @@ function App() {
                     </NavDropdown>
                   )}
 
-              </Nav>
+                </Nav>
               </Navbar.Collapse>
             </Container>
           </Navbar>
@@ -135,7 +139,7 @@ function App() {
                   </ProtectedRoute>
                 }
               ></Route>
-                  <Route
+              <Route
                 path="/admin/dashboard"
                 element={
                   <AdminRoute>
@@ -151,7 +155,7 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
-               <Route
+              <Route
                 path="/admin/users"
                 element={
                   <AdminRoute>
@@ -159,7 +163,7 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
-               <Route
+              <Route
                 path="/admin/products"
                 element={
                   <AdminRoute>
@@ -167,7 +171,7 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
-                <Route
+              <Route
                 path="/admin/product/:id"
                 element={
                   <AdminRoute>
@@ -175,7 +179,7 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
-                <Route
+              <Route
                 path="/admin/user/:id"
                 element={
                   <AdminRoute>
@@ -188,7 +192,7 @@ function App() {
           </Container>
         </main>
         <footer>
-          <div className='text-center bg-dark text-white mt-3'>Web Design Final Project 2022</div>
+          <div className='text-center bg-dark text-white mt-3'>@Web Design Final Project 2022 - Group 16</div>
         </footer>
       </div>
     </BrowserRouter>

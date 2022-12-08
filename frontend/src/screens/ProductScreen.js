@@ -13,6 +13,7 @@ import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { getError } from "../utils";
 import { Store } from "../Store";
+import Image from "react-bootstrap/Image";
 
 
 const reducer = (state, action) => {
@@ -78,7 +79,7 @@ function ProductScreen() {
                 <div>
                     <Row>
                         <Col md={6} className="cards">
-                            <img className="img-large" src={product.image} alt={product.name}></img>
+                            <Image className="img-large" src={product.image} alt={product.name}/>
                         </Col>
                         <Col md={3}>
                             <ListGroup variant="flush" className="cards">

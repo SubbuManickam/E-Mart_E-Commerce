@@ -9,6 +9,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import axios from "axios";
+import { Image } from "react-bootstrap";
 
 export default function CartScreen() {
 
@@ -58,7 +59,7 @@ export default function CartScreen() {
                                 <ListGroup.Item key={item._id}>
                                     <Row className="align-items-center">
                                         <Col md={4}>
-                                            <img src={item.image} alt={item.name} className="img-fluid rounded img-thumbnail"></img>{' '}
+                                            <Image src={item.image} alt={item.name} className="img-fluid rounded img-thumbnail" style={{width: '8rem'}}/>{' '}
                                             <Link to={`/product/${item.slug}`}>{item.name}</Link>
                                         </Col>
                                         <Col md={3}>
