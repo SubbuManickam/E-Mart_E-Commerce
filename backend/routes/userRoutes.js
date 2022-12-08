@@ -7,6 +7,7 @@ import { isAuth, isAdmin, generateToken } from '../utils.js';
 
 const userRouter = express.Router();
 
+//Get list of users
 userRouter.get(
   '/',
   isAuth,
@@ -17,6 +18,7 @@ userRouter.get(
   })
 );
 
+//Find particular user using userId
 userRouter.get(
   '/:id',
   isAuth,
@@ -31,6 +33,7 @@ userRouter.get(
   })
 );
 
+//Update and existing user record
 userRouter.put(
   '/:id',
   isAuth,
@@ -49,6 +52,7 @@ userRouter.put(
   })
 );
 
+//Delete user API
 userRouter.delete(
   '/:id',
   isAuth,
@@ -57,7 +61,7 @@ userRouter.delete(
     const user = await User.findById(req.params.id);
     if (user) {
       if (user.email === 'admin@example.com') {
-        res.status(400).send({ message: 'Can Not Delete Admin User' });
+        res.status(400).send({ message: 'Cannot Delete Admin User' });
         return;
       }
       await user.remove();
@@ -68,6 +72,7 @@ userRouter.delete(
   })
 );
 
+//SignIn validations and functionality
 userRouter.post('/signin', expressAsyncHandler(async(req, res) => {
 
     const user = await User.findOne({email: req.body.email});
@@ -86,6 +91,7 @@ userRouter.post('/signin', expressAsyncHandler(async(req, res) => {
     res.status(401).send({message: 'Invalid Email or Password'});
 }));
 
+//SignUp validations and functionality
 userRouter.post('/signup',expressAsyncHandler(async(req, res) => {
     const newUser = new User ({
         name: req.body.name,
@@ -102,6 +108,7 @@ userRouter.post('/signup',expressAsyncHandler(async(req, res) => {
     });
 }));
 
+//User profile details
 userRouter.put(
     '/profile',
     isAuth,
@@ -127,7 +134,5 @@ userRouter.put(
       }
     })
   );
-
-
 
 export default userRouter;

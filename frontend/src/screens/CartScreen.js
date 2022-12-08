@@ -11,10 +11,11 @@ import Card from "react-bootstrap/Card";
 import axios from "axios";
 import { Image } from "react-bootstrap";
 
+//Manage cart screen for specific user
 export default function CartScreen() {
 
     const navigate = useNavigate();
-    
+
     const { state, dispatch: ctxDispatch } = useContext(Store);
     const {
         cart: { cartItems },
@@ -22,24 +23,25 @@ export default function CartScreen() {
 
 
     const updateCartHandler = async (item, quantity) => {
-        const {data} = await axios.get(`/api/products/${item._id}`);
+        const { data } = await axios.get(`/api/products/${item._id}`);
 
-        if(data.countInStock < quantity) {
+        if (data.countInStock < quantity) {
             window.alert('Product is currently Out of Stock');
             return;
         }
 
-        ctxDispatch({type: 'CART_ADD_ITEM', payload: {...item, quantity}});
+        ctxDispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity } });
     };
 
     const removeItemHandler = (item) => {
-        ctxDispatch({type: 'CART_REMOVE_ITEM', payload: item});
+        ctxDispatch({ type: 'CART_REMOVE_ITEM', payload: item });
     };
 
     const checkoutHandler = () => {
         navigate('/signin?redirect=/shipping')
     };
 
+    //Increase, decrease count and stash items from cart
     return (
         <div>
             <Helmet>
@@ -59,19 +61,19 @@ export default function CartScreen() {
                                 <ListGroup.Item key={item._id}>
                                     <Row className="align-items-center">
                                         <Col md={4}>
-                                            <Image src={item.image} alt={item.name} className="img-fluid rounded img-thumbnail" style={{width: '8rem'}}/>{' '}
+                                            <Image src={item.image} alt={item.name} className="img-fluid rounded img-thumbnail" style={{ width: '8rem' }} />{' '}
                                             <Link to={`/product/${item.slug}`}>{item.name}</Link>
                                         </Col>
                                         <Col md={3}>
                                             <Button onClick={
                                                 () => updateCartHandler(item, item.quantity - 1)
-                                                } variant="light" disabled={item.quantity === 1}>
+                                            } variant="light" disabled={item.quantity === 1}>
                                                 <i className="fas fa-minus-circle"></i>
                                             </Button> {' '}
                                             <span>{item.quantity}</span>{' '}
                                             <Button onClick={
                                                 () => updateCartHandler(item, item.quantity + 1)
-                                                } variant="light" disabled={item.quantity === item.countInStock}>
+                                            } variant="light" disabled={item.quantity === item.countInStock}>
                                                 <i className="fas fa-plus-circle"></i>
                                             </Button> {' '}
                                         </Col>

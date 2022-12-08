@@ -18,15 +18,16 @@ const reducer = (state, action) => {
         default: return state;
     }
 }
-function HomeScreen() {
 
+//Home Page of the application
+function HomeScreen() {
 
     const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
         products: [],
         loading: true,
         error: ''
     });
-    
+
     useEffect(() => {
 
         const fetchData = async () => {
@@ -48,21 +49,20 @@ function HomeScreen() {
             <Helmet>
                 <title>E-Mart</title>
             </Helmet>
-            <CarouselHome className='carousel'/>
-            <h1  className='my-3'>Featured Products</h1>
+            <CarouselHome className='carousel' />
+            <h1 className='my-3'>Featured Products</h1>
             <div className="products">
                 {
-
-                    loading ? (<LoadingBox /> ):
-                    error ? (<MessageBox variant="danger">{error}</MessageBox>) : (
-                        <Row className="cards">
-                            {products.map(product => (
-                                <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
-                                    <Product product={product}></Product>
-                                </Col>
-                            ))}
-                        </Row>
-                    )
+                    loading ? (<LoadingBox />) :
+                        error ? (<MessageBox variant="danger">{error}</MessageBox>) : (
+                            <Row className="cards">
+                                {products.map(product => (
+                                    <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
+                                        <Product product={product}></Product>
+                                    </Col>
+                                ))}
+                            </Row>
+                        )
                 }
             </div>
         </div>

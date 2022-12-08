@@ -1,6 +1,8 @@
 function Rating(props) {
+    
     const { rating, numReviews } = props;
 
+    //Calculate font-awesome star component for ratings
     return (
         <div className="rating">
             <span>
@@ -28,7 +30,7 @@ function Rating(props) {
                     rating >= 4.5 ? 'fas fa-star-half-alt' : 'far fa-star'} />
             </span>
 
-            <span style={{color: 'black'}}> {numReviews} reviews</span>
+            <span style={{ color: 'black' }}> {numReviews} reviews</span>
         </div>
     )
 }

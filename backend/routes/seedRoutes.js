@@ -5,7 +5,8 @@ import User from "../models/userModel.js";
 
 const seedRouter = express.Router();
 
-seedRouter.get('/', async(req, res) => {
+//MongoDB instantiation using data.js file
+seedRouter.get('/', async (req, res) => {
 
     await Product.remove({});
     const createdProducts = await Product.insertMany(data.products);
@@ -13,7 +14,7 @@ seedRouter.get('/', async(req, res) => {
     await User.remove({});
     const createdUsers = await User.insertMany(data.users);
 
-    res.send({createdProducts, createdUsers})
+    res.send({ createdProducts, createdUsers })
 });
 
 export default seedRouter;

@@ -3,10 +3,11 @@ import expressAsyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
 import User from '../models/userModel.js';
 import Product from '../models/productModel.js';
-import { isAuth,isAdmin } from '../utils.js';
+import { isAuth, isAdmin } from '../utils.js';
 
 const orderRouter = express.Router();
 
+//Update order records in MongoDB
 orderRouter.get(
   '/',
   isAuth,
@@ -16,25 +17,26 @@ orderRouter.get(
     res.send(orders);
   })
 );
+
+//Create a new order based on details from user
 orderRouter.post('/', isAuth, expressAsyncHandler(async (req, res) => {
-    const newOrder = new Order({
-        orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id })),
-        shippingAddress: req.body.shippingAddress,
-        paymentMethod: req.body.paymentMethod,
-        itemsPrice: req.body.itemsPrice,
-        shippingPrice: req.body.shippingPrice,
-        taxPrice: req.body.taxPrice,
-        totalPrice: req.body.totalPrice,
-        user: req.user._id,
-    });
+  const newOrder = new Order({
+    orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id })),
+    shippingAddress: req.body.shippingAddress,
+    paymentMethod: req.body.paymentMethod,
+    itemsPrice: req.body.itemsPrice,
+    shippingPrice: req.body.shippingPrice,
+    taxPrice: req.body.taxPrice,
+    totalPrice: req.body.totalPrice,
+    user: req.user._id,
+  });
 
-
-
-    const order = await newOrder.save();
-    res.status(201).send({ message: 'New Order Created', order });
+  const order = await newOrder.save();
+  res.status(201).send({ message: 'New Order Created', order });
 })
 );
 
+//Order summary API
 orderRouter.get(
   '/summary',
   isAuth,
@@ -79,7 +81,7 @@ orderRouter.get(
   })
 );
 
-
+//User specific order history
 orderRouter.get(
   '/mine',
   isAuth,
@@ -89,15 +91,15 @@ orderRouter.get(
   })
 );
 
-
+//API to find a specific order and its details
 orderRouter.get('/:id', isAuth, expressAsyncHandler(async (req, res) => {
-    const order = await Order.findById(req.params.id);
-    if (order) {
-      res.send(order);
-    } else {
-      res.status(404).send({ message: 'Order Not Found' });
-    }
-  })
+  const order = await Order.findById(req.params.id);
+  if (order) {
+    res.send(order);
+  } else {
+    res.status(404).send({ message: 'Order Not Found' });
+  }
+})
 );
 
 orderRouter.put(
@@ -116,40 +118,43 @@ orderRouter.put(
   })
 );
 
+//API to track the payment status from PayPal
 orderRouter.put(
-    '/:id/pay',
-    isAuth,
-    expressAsyncHandler(async (req, res) => {
-      const order = await Order.findById(req.params.id);
-      if (order) {
-        order.isPaid = true;
-        order.paidAt = Date.now();
-        order.paymentResult = {
-          id: req.body.id,
-          status: req.body.status,
-          update_time: req.body.update_time,
-          email_address: req.body.email_address,
-        };
-        const updatedOrder = await order.save();
-        res.send({ message: 'Order Paid', order: updatedOrder });
-      } else {
-        res.status(404).send({ message: 'Order Not Found' });
-      }
-    })
-  );
-  
-  orderRouter.delete(
-    '/:id',
-    isAuth,
-    isAdmin,
-    expressAsyncHandler(async (req, res) => {
-      const order = await Order.findById(req.params.id);
-      if (order) {
-        await order.remove();
-        res.send({ message: 'Order Deleted' });
-      } else {
-        res.status(404).send({ message: 'Order Not Found' });
-      }
-    })
-  );
+  '/:id/pay',
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id);
+    if (order) {
+      order.isPaid = true;
+      order.paidAt = Date.now();
+      order.paymentResult = {
+        id: req.body.id,
+        status: req.body.status,
+        update_time: req.body.update_time,
+        email_address: req.body.email_address,
+      };
+      const updatedOrder = await order.save();
+      res.send({ message: 'Order Paid', order: updatedOrder });
+    } else {
+      res.status(404).send({ message: 'Order Not Found' });
+    }
+  })
+);
+
+//API to delete order from database
+orderRouter.delete(
+  '/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id);
+    if (order) {
+      await order.remove();
+      res.send({ message: 'Order Deleted' });
+    } else {
+      res.status(404).send({ message: 'Order Not Found' });
+    }
+  })
+);
+
 export default orderRouter;

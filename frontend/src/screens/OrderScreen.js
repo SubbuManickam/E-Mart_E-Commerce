@@ -15,6 +15,7 @@ import { Store } from '../Store';
 import { getError } from '../utils';
 import { toast } from 'react-toastify';
 
+//Reduce actions for order placement screen
 function reducer(state, action) {
   switch (action.type) {
     case 'FETCH_REQUEST':
@@ -78,6 +79,7 @@ export default function OrderScreen() {
 
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
 
+  //Create a new order based on user details
   function createOrder(data, actions) {
     return actions.order
       .create({
@@ -92,6 +94,7 @@ export default function OrderScreen() {
       });
   }
 
+  //Check for payment approval and change status on screen to Paid
   function onApprove(data, actions) {
     return actions.order.capture().then(async function (details) {
       try {
@@ -180,8 +183,7 @@ export default function OrderScreen() {
     }
   }
 
-
-
+  //Display order placement screen to user 
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (

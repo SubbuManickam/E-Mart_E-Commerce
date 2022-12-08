@@ -1,10 +1,11 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Product from '../models/productModel.js'
-import {isAuth,isAdmin} from '../utils.js';
+import { isAuth, isAdmin } from '../utils.js';
 
 const productRouter = express.Router();
 
+//Create a new product
 productRouter.post(
   '/',
   isAuth,
@@ -27,6 +28,7 @@ productRouter.post(
   })
 );
 
+//Update an existing product
 productRouter.put(
   '/:id',
   isAuth,
@@ -51,6 +53,7 @@ productRouter.put(
   })
 );
 
+//Delete an existing product
 productRouter.delete(
   '/:id',
   isAuth,
@@ -68,6 +71,7 @@ productRouter.delete(
 
 const PAGE_SIZE = 3;
 
+//Show list of products to admin
 productRouter.get(
   '/admin',
   isAuth,
@@ -90,29 +94,32 @@ productRouter.get(
   })
 );
 
+//Get list of products from MongoDB
 productRouter.get('/', async (req, res) => {
-    const products = await Product.find();
-    res.send(products);
+  const products = await Product.find();
+  res.send(products);
 });
 
+//Product details page for individual products found using unique slug
 productRouter.get('/slug/:slug', async (req, res) => {
-    const product = await Product.findOne({ slug: req.params.slug });
-    if (product) {
-        res.send(product);
-    }
-    else {
-        res.status(404).send({ message: 'Product Not Found' })
-    }
+  const product = await Product.findOne({ slug: req.params.slug });
+  if (product) {
+    res.send(product);
+  }
+  else {
+    res.status(404).send({ message: 'Product Not Found' })
+  }
 });
 
+//Product details page for individual products found using unique id
 productRouter.get('/:id', async (req, res) => {
-    const product = await Product.findById(req.params.id);
-    if (product) {
-        res.send(product);
-    }
-    else {
-        res.status(404).send({ message: 'Product Not Found' })
-    }
+  const product = await Product.findById(req.params.id);
+  if (product) {
+    res.send(product);
+  }
+  else {
+    res.status(404).send({ message: 'Product Not Found' })
+  }
 });
 
 export default productRouter;

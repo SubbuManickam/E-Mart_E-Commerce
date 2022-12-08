@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+//MonogoDB schema for Orders collection
 const orderSchema = new mongoose.Schema(
   {
     orderItems: [

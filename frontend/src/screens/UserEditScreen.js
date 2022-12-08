@@ -68,6 +68,7 @@ export default function UserEditScreen() {
     fetchData();
   }, [userId, userInfo]);
 
+  //User Update Handler
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -89,6 +90,8 @@ export default function UserEditScreen() {
       dispatch({ type: 'UPDATE_FAIL' });
     }
   };
+
+  //Let the Admin edit any particular user history
   return (
     <Container className="small-container">
       <Helmet>

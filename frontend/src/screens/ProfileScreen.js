@@ -33,6 +33,7 @@ export default function ProfileScreen() {
     loadingUpdate: false,
   });
 
+  //Allow user to edit their password and re-save it
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -61,6 +62,7 @@ export default function ProfileScreen() {
     }
   };
 
+  //Display profile management screen to user
   return (
     <div className="container small-container">
       <Helmet>

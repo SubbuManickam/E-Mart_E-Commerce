@@ -9,6 +9,7 @@ import MessageBox from '../components/MessageBox';
 import { Store } from '../Store';
 import { getError } from '../utils';
 
+//Reduce options for handling order list
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
@@ -21,22 +22,23 @@ const reducer = (state, action) => {
       };
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
-      case 'DELETE_REQUEST':
-        return { ...state, loadingDelete: true, successDelete: false };
-      case 'DELETE_SUCCESS':
-        return {
-          ...state,
-          loadingDelete: false,
-          successDelete: true,
-        };
-      case 'DELETE_FAIL':
-        return { ...state, loadingDelete: false };
-      case 'DELETE_RESET':
-        return { ...state, loadingDelete: false, successDelete: false };
+    case 'DELETE_REQUEST':
+      return { ...state, loadingDelete: true, successDelete: false };
+    case 'DELETE_SUCCESS':
+      return {
+        ...state,
+        loadingDelete: false,
+        successDelete: true,
+      };
+    case 'DELETE_FAIL':
+      return { ...state, loadingDelete: false };
+    case 'DELETE_RESET':
+      return { ...state, loadingDelete: false, successDelete: false };
     default:
       return state;
   }
 };
+
 export default function OrderListScreen() {
   const navigate = useNavigate();
   const { state } = useContext(Store);
@@ -63,14 +65,15 @@ export default function OrderListScreen() {
       }
     };
     if (successDelete) {
-        dispatch({ type: 'DELETE_RESET' });
-      } else {
-        fetchData();
-      }
-    }, [userInfo, successDelete]);
+      dispatch({ type: 'DELETE_RESET' });
+    } else {
+      fetchData();
+    }
+  }, [userInfo, successDelete]);
 
+  //Delete an existing order
   const deleteHandler = async (order) => {
-    if (window.confirm('Are you sure to delete?')) {
+    if (window.confirm('Are you sure you want to delete this order?')) {
       try {
         dispatch({ type: 'DELETE_REQUEST' });
         await axios.delete(`/api/orders/${order._id}`, {
@@ -87,6 +90,7 @@ export default function OrderListScreen() {
     }
   };
 
+  //Show order list to admin
   return (
     <div>
       <Helmet>
@@ -126,21 +130,13 @@ export default function OrderListScreen() {
                     : 'No'}
                 </td>
                 <td>
-                  <Button
-                    type="button"
-                    variant="light"
-                    onClick={() => {
-                      navigate(`/order/${order._id}`);
-                    }}
-                  >
+                  <Button type="button" variant="light" onClick={() => {
+                    navigate(`/order/${order._id}`);
+                  }}>
                     Details
                   </Button>
                   &nbsp;
-                  <Button
-                    type="button"
-                    variant="light"
-                    onClick={() => deleteHandler(order)}
-                  >
+                  <Button type="button" variant="light" onClick={() => deleteHandler(order)}>
                     Delete
                   </Button>
                 </td>

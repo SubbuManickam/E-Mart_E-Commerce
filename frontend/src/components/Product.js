@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { Store } from "../Store";
 import Image from 'react-bootstrap/Image'
 
+//Show products in the Home screen
 function Product(props) {
     const { product } = props;
 
@@ -15,6 +16,7 @@ function Product(props) {
         cart: { cartItems },
     } = state;
 
+    //Add to cart button functionality from Home Screen
     const addToCartHandler = async (item) => {
 
         const existItem = cartItems.find((x) => x._id === product._id);
@@ -30,10 +32,11 @@ function Product(props) {
         ctxDispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity } });
     };
 
+    //Show Product Cards to user
     return (
         <Card>
             <Link to={`/product/${product.slug}`}>
-                <Image src={product.image} className="card-img-top" alt={product.name} style={{ height: '12rem'}} />
+                <Image src={product.image} className="card-img-top" alt={product.name} style={{ height: '12rem' }} />
             </Link>
             <Card.Body>
                 <Link to={`/product/${product.slug}`}>

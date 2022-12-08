@@ -2,6 +2,7 @@ import React from 'react';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
+//Maintain workflow for checkout steps based on user actions
 export default function CheckoutSteps(props) {
 
     return (

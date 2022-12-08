@@ -1,11 +1,13 @@
 import bcrypt from 'bcryptjs';
 
+//Initial MongoDB creation file.
 const data = {
 
     users: [
         {
             name: 'Subbu',
             email: 'subbu@gmail.com',
+            //Password encrypted using bcrypt
             password: bcrypt.hashSync('Abc123'),
             isAdmin: true
         },

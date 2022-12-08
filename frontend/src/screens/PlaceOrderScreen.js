@@ -14,6 +14,7 @@ import { toast } from 'react-toastify';
 import Axios from 'axios';
 import LoadingBox from '../components/LoadingBox';
 
+//Reduce actions when an user places an order
 const reducer = (state, action) => {
     switch (action.type) {
         case 'CREATE_REQUEST': return { ...state, loading: true };
@@ -37,6 +38,7 @@ export default function PlaceOrderScreen() {
     const { state, dispatch: ctxDispatch } = useContext(Store);
     const { cart, userInfo } = state;
 
+    //Calculate total order price by adding tax and shipping fee if applicable
     const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
     cart.itemsPrice = round2(
         cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
@@ -57,7 +59,7 @@ export default function PlaceOrderScreen() {
                 shippingPrice: cart.shippingPrice,
                 taxPrice: cart.taxPrice,
                 totalPrice: cart.totalPrice,
-                },
+            },
                 {
                     headers: {
                         authorization: `Bearer ${userInfo.token}`,
@@ -82,6 +84,7 @@ export default function PlaceOrderScreen() {
         }
     }, [cart, navigate]);
 
+    //Show order preview screen to user
     return (
         <div>
             <CheckoutSteps step1 step2 step3 step4 step5></CheckoutSteps>

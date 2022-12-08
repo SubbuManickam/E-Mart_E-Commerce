@@ -1,13 +1,14 @@
 import express from 'express';
 import multer from 'multer';
 import { v2 as cloudinary } from 'cloudinary';
-import streamifier from 'streamifier';//package
+import streamifier from 'streamifier';
 import { isAdmin, isAuth } from '../utils.js';
 
-const upload = multer();//package to upload file to server
+const upload = multer();
 
 const uploadRouter = express.Router();
 
+//API to upload external files to server
 uploadRouter.post(
   '/',
   isAuth,

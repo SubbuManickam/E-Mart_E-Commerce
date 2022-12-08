@@ -28,6 +28,7 @@ export default function ShippingAddressScreen() {
         }
     }, [userInfo, navigate]);
 
+    //Store the user's shipping address in localstorage
     const submitHandler = (e) => {
         e.preventDefault();
         ctxDispatch({
@@ -51,6 +52,7 @@ export default function ShippingAddressScreen() {
         navigate('/payment');
     };
 
+    //Allow user to enter the shipping address
     return (
         <div>
             <Helmet>

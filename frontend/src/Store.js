@@ -2,7 +2,6 @@ import { createContext, useReducer } from "react";
 
 export const Store = createContext();
 
-
 const initialState = {
     userInfo: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null,
     cart: {
@@ -12,6 +11,7 @@ const initialState = {
     },
 };
 
+//Perform state functions based on user actions
 function reducer(state, action) {
 
     switch (action.type) {

@@ -9,6 +9,8 @@ import { Store } from "../Store";
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
 
+//Allow user to choose payment option
+//We have only PayPal implemented in this application
 export default function PaymentMethodScreen() {
 
     const navigate = useNavigate();
@@ -23,6 +25,7 @@ export default function PaymentMethodScreen() {
         }
     }, [shippingAddress, navigate])
 
+    //Save Payment option in localstorage
     const submitHandler = (e) => {
         e.preventDefault();
         ctxDispatch({ type: 'SAVE_PAYMENT_METHOD', payload: paymentMethodName });

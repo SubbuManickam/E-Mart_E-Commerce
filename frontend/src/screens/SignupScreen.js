@@ -24,9 +24,10 @@ export default function SignupScreen() {
     const { state, dispatch: ctxDispatch } = useContext(Store);
     const { userInfo } = state;
 
+    //Allow new account creation if all validations are met
     const submitHandler = async (e) => {
         e.preventDefault();
-        if(password !== confirmPassword) {
+        if (password !== confirmPassword) {
             toast.error("Passwords do not match!");
             return;
         }
@@ -50,6 +51,7 @@ export default function SignupScreen() {
         }
     }, [navigate, redirect, userInfo]);
 
+    //When a new user creates an account allow signup by storing releavnt information
     return (
         <Container className="small-container">
             <Helmet>
@@ -77,7 +79,7 @@ export default function SignupScreen() {
                     <Form.Label>Confirm Password</Form.Label>
                     <Form.Control type="password" required onChange={(e) => setConfirmPassword(e.target.value)} />
                 </Form.Group>
-                
+
                 <div className="mb-3">
                     <Button type="submit">Sign Up</Button>
                 </div>

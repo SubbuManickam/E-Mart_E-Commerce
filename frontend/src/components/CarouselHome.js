@@ -9,6 +9,7 @@ function CarouselHome() {
     setIndex(selectedIndex);
   };
 
+  //Add a Carousel to Home screen
   return (
     <Carousel activeIndex={index} onSelect={handleSelect}>
       <Carousel.Item>
@@ -16,7 +17,7 @@ function CarouselHome() {
           className="d-block w-100"
           src="/images/p1.png"
           alt="First slide"
-          style={{height: '35rem'}}
+          style={{ height: '35rem' }}
         />
         <Carousel.Caption>
           <h3>Apple iPhone</h3>
@@ -28,7 +29,7 @@ function CarouselHome() {
           className="d-block w-100"
           src="/images/p2.jpg"
           alt="Second slide"
-          style={{height: '35rem'}}
+          style={{ height: '35rem' }}
         />
         <Carousel.Caption>
           <h3>Google Pixel</h3>
@@ -40,7 +41,7 @@ function CarouselHome() {
           className="d-block w-100"
           src="/images/l2.png"
           alt="Third slide"
-          style={{height: '35rem'}}
+          style={{ height: '35rem' }}
         />
         <Carousel.Caption>
           <h3>MacBook Pro</h3>
@@ -52,7 +53,7 @@ function CarouselHome() {
           className="d-block w-100"
           src="/images/l1.jpg"
           alt="Fourth slide"
-          style={{height: '35rem'}}
+          style={{ height: '35rem' }}
         />
         <Carousel.Caption>
           <h3>Laptops</h3>
